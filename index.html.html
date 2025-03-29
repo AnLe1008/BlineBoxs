@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hộp Bí Ẩn Về Văn Hóa Truyền Thống Việt Nam</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- (Previous CSS styles remain the same) --- */
+
+        /* CSS chung */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #d32f2f;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .sidebar-menu a.active {
+            background-color: rgba(255,255,255,0.2);
+            border-left: 4px solid white;
+            padding-left: 16px;
+        }
+
+        .cart-icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cart-icon-container .fa-shopping-cart {
+            margin-right: 10px;
+        }
+
+        #cart-count {
+            background-color: white;
+            color: #d32f2f;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.8em;
+            font-weight: bold;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        /* Main content */
+        .main-content {
+            margin-left: 250px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #d32f2f;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        /* Product section */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .mystery-box {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 350px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mystery-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .box-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .box-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .box-content > *:last-child {
+             margin-top: auto;
+        }
+
+        .box-title {
+            font-size: 24px;
+            margin: 0 0 10px;
+            color: #d32f2f;
+        }
+
+        .box-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .combo-options {
+            margin: 15px 0;
+        }
+
+        .combo-option {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+
+        .combo-option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .combo-option.selected {
+            background-color: #d32f2f;
+            color: white;
+            font-weight: bold;
+        }
+        .combo-option.selected span:last-child {
+             font-weight: bold;
+        }
+
+
+        .box-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #d32f2f;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .cta-button {
+            display: block;
+            background: linear-gradient(45deg, #d32f2f, #f44336);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(45deg, #b71c1c, #d32f2f);
+            transform: scale(1.02);
+        }
+
+
+        /* Form đặt hàng / Cart Modal Base Style */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            z-index: 1000;
+            width: 450px;
+            max-width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal h2 {
+             text-align: center;
+             margin-bottom: 20px;
+             color: #d32f2f;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .submit-btn, .close-btn {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+         .close-btn {
+            background: #aaa;
+            margin-top: 15px;
+        }
+        .close-btn:hover {
+            background: #888;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 999;
+        }
+
+        /* Cart Specific Styles */
+         #cartModal .modal-content{
+             /* Add styles if needed for content area */
+         }
+         .cart-items-container {
+             margin-bottom: 20px;
+             max-height: 300px; /* Limit height of item list */
+             overflow-y: auto; /* Scroll for items */
+             border-top: 1px solid #eee;
+             border-bottom: 1px solid #eee;
+             padding: 15px 0;
+             min-height: 50px; /* Ensure some height even when empty */
+         }
+         .cart-item {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             padding: 10px 5px;
+             border-bottom: 1px dotted #eee;
+         }
+         .cart-item:last-child {
+             border-bottom: none;
+         }
+         .cart-item-details {
+             flex-grow: 1;
+             margin: 0 10px;
+         }
+         .cart-item-name {
+             font-weight: bold;
+             font-size: 0.95em;
+         }
+         .cart-item-price {
+             color: #555;
+             font-size: 0.9em;
+         }
+          .cart-item-quantity input {
+            width: 50px;
+            text-align: center;
+            padding: 5px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+         }
+         .cart-remove-btn {
+             background: none;
+             border: none;
+             color: #d32f2f;
+             font-size: 1.1em;
+             cursor: pointer;
+             padding: 5px; /* Add padding for easier clicking */
+         }
+          .cart-total {
+             text-align: right;
+             font-size: 1.2em;
+             font-weight: bold;
+             margin-top: 20px;
+             padding-top: 15px;
+             border-top: 1px solid #ccc;
+         }
+          #cart-empty-msg {
+             text-align: center;
+             color: #888;
+             padding: 20px;
+             display: none; /* Hide initially */
+         }
+
+        /* Order Form Payment Specific Styles */
+        .payment-methods {
+            margin: 20px 0;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .payment-method input[type="radio"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #d32f2f;
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: pointer;
+            position: relative;
+            top: 3px;
+        }
+        .payment-method input[type="radio"]:checked {
+             background-color: #d32f2f;
+             border-color: #d32f2f;
+        }
+        .payment-method input[type="radio"]:checked::after {
+             content: '';
+             display: block;
+             width: 8px;
+             height: 8px;
+             background-color: white;
+             border-radius: 50%;
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+         }
+
+
+        .payment-qr {
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+            border: 1px dashed #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .payment-qr img {
+             max-width: 150px;
+             height: auto;
+             margin: 10px auto;
+             border: 1px solid #eee;
+         }
+        .payment-qr p {
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.5;
+        }
+        .payment-amount { font-weight: bold; }
+        .payment-order-code { color: #d32f2f; font-family: monospace; }
+
+        /* Thank You Modal */
+        .thank-you {
+            text-align: center;
+            padding: 20px;
+        }
+        .thank-you h2 { color: #d32f2f;}
+        .thank-you img {
+            max-width: 150px;
+            margin: 15px auto;
+        }
+
+
+        /* Info page */
+        .info-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+         .info-grid {
+             display: grid;
+             grid-template-columns: 1fr;
+             gap: 40px;
+         }
+
+        .info-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 30px;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+
+        .info-item h3 {
+            color: #d32f2f;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d32f2f;
+            display: inline-block;
+        }
+
+        .info-details {
+             display: flex;
+             flex-direction: column;
+             gap: 20px;
+         }
+
+         .info-text {
+            flex: 1;
+            line-height: 1.7;
+         }
+        .info-text ul {
+            list-style: disc;
+            margin-left: 25px;
+            margin-top: 10px;
+            color: #555;
+         }
+         .info-text li { margin-bottom: 5px; }
+
+
+        .info-visuals {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 15px; /* Add some padding */
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            border: 1px solid #eee; /* Add light border */
+            max-width: 220px; /* Constrain width */
+            margin: 0 auto; /* Center it when stacked vertically */
+        }
+        .info-illustration {
+             max-width: 150px;
+             height: auto;
+             border-radius: 5px;
+             border: 1px solid #ddd;
+             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+         }
+
+        .qr-code { /* Modified for info page */
+            width: 90px;
+            height: 90px;
+            margin: 0;
+            display: block;
+            border: 2px solid #d32f2f;
+            border-radius: 5px;
+            padding: 4px;
+            background-color: white;
+            transition: transform 0.3s ease;
+        }
+         .qr-code:hover {
+             transform: scale(1.08);
+         }
+
+        /* Responsive */
+        @media (min-width: 769px) {
+            .info-details {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+            .info-visuals {
+                flex-basis: 220px; /* Give visuals a fixed base width */
+                flex-shrink: 0;
+                margin: 0 0 0 20px; /* Margin left when side-by-side */
+                align-self: flex-start; /* Align top */
+             }
+             .info-item h3 {
+                  margin-bottom: 20px;
+              }
+         }
+
+        @media (max-width: 992px) {
+             .mystery-box {
+                 width: calc(50% - 15px); /* Two boxes per row */
+                 min-height: 500px; /* Try to maintain height */
+             }
+             .combo-box .box-description {
+                 font-size: 0.95em; /* Slightly smaller text in combo descriptions */
+             }
+              .combo-option span {
+                 font-size: 0.9em; /* Slightly smaller text */
+             }
+         }
+
+        @media (max-width: 768px) {
+            body {
+                 flex-direction: column;
+             }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                z-index: 1;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+             .modal {
+                 width: 90%;
+             }
+            .mystery-box {
+                 width: calc(50% - 10px); /* Adjust gap */
+                 gap: 20px;
+                  min-height: auto; /* Let height be auto */
+             }
+             .box-image { height: 200px;}
+         }
+          @media (max-width: 576px) {
+               .mystery-box {
+                  width: 100%; /* One box per row */
+               }
+                .header h1 { font-size: 1.8em; }
+                .header p { font-size: 1em; }
+                .box-title { font-size: 20px; }
+                .main-content { padding: 10px; }
+           }
+
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Hộp Bí Ẩn</h2>
+            <p>Văn Hóa Việt Nam</p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#" class="active" onclick="showSection('home'); return false;"><i class="fas fa-home fa-fw"></i> Trang chủ</a></li>
+            <li><a href="#" onclick="showSection('products'); return false;"><i class="fas fa-box-open fa-fw"></i> Sản phẩm</a></li>
+            <li><a href="#" onclick="showSection('info'); return false;"><i class="fas fa-info-circle fa-fw"></i> Thông tin</a></li>
+            <li>
+                <a href="#" onclick="showCart(); return false;" class="cart-icon-container">
+                    <span><i class="fas fa-shopping-cart fa-fw"></i> Giỏ hàng</span>
+                    <span id="cart-count">0</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Home Section -->
+        <div id="home-section">
+            <div class="header">
+                <h1>Hộp Bí Ẩn Về Văn Hóa Truyền Thống Việt Nam</h1>
+                <p>Khám phá văn hóa đặc sắc của Việt Nam qua từng sản phẩm</p>
+            </div>
+
+            <div class="container">
+                <!-- Hộp Cơ Bản -->
+                <div class="mystery-box" id="basic-box">
+                    <img src="https://i.imgur.com/3L8NKeC.jpeg" alt="Hộp Bí Ẩn Cơ Bản" class="box-image">
+                    <div class="box-content">
+                        <h2 class="box-title">Hộp Cơ Bản</h2>
+                        <p class="box-description">
+                            Khám phá những món quà bất ngờ với hộp bí ẩn tiêu chuẩn.
+                            Phù hợp cho người mới bắt đầu trải nghiệm.
+                        </p>
+                        <div class="box-price">100.000₫</div>
+                        <button class="cta-button" onclick="addToCart('basic-1', 'Hộp Cơ Bản', 100000, 1)">Thêm vào giỏ</button>
+                    </div>
+                </div>
+
+                <!-- Hộp Cao Cấp -->
+                <div class="mystery-box" id="premium-box">
+                    <img src="https://i.imgur.com/5jsR9jU.jpeg" alt="Hộp Bí Ẩn Cao Cấp" class="box-image">
+                    <div class="box-content">
+                        <h2 class="box-title">Hộp Cao Cấp</h2>
+                        <p class="box-description">
+                            Trải nghiệm đẳng cấp với những món quà cao cấp được lựa chọn kỹ lưỡng.
+                            Dành cho những người sành điệu.
+                        </p>
+                        <div class="box-price">200.000₫</div>
+                         <button class="cta-button" onclick="addToCart('premium-1', 'Hộp Cao Cấp', 200000, 1)">Thêm vào giỏ</button>
+                    </div>
+                </div>
+
+                <!-- Hộp VIP -->
+                <div class="mystery-box" id="vip-box">
+                    <img src="https://i.imgur.com/BOiKqaq.jpeg" alt="Hộp Bí Ẩn VIP" class="box-image">
+                    <div class="box-content">
+                        <h2 class="box-title">Hộp VIP</h2>
+                        <p class="box-description">
+                            Đẳng cấp vượt trội với những món quà độc nhất vô nhị.
+                            Trải nghiệm sang trọng dành cho giới thượng lưu.
+                        </p>
+                        <div class="box-price">300.000₫</div>
+                         <button class="cta-button" onclick="addToCart('vip-1', 'Hộp VIP', 300000, 1)">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Section (Combos) -->
+        <div id="products-section" style="display: none;">
+            <div class="header">
+                <h1>Combo Hộp Bí Ẩn</h1>
+                <p>Tiết kiệm hơn khi mua combo nhiều hộp</p>
+            </div>
+
+            <div class="container">
+                <!-- Combo Hộp Cơ Bản -->
+                <div class="mystery-box combo-box">
+                    <img src="https://i.imgur.com/3L8NKeC.jpeg" alt="Combo Hộp Cơ Bản" class="box-image">
+                    <div class="box-content">
+                        <h2 class="box-title">Combo Hộp Cơ Bản</h2>
+                        <p class="box-description">
+                            Tiết kiệm chi phí khi mua số lượng lớn hộp cơ bản. Chọn số lượng mong muốn:
+                        </p>
+
+                        <div class="combo-options" data-product-type="Hộp Cơ Bản" data-base-price="100000">
+                             <div class="combo-option selected" data-quantity="1" data-price="100000">
+                                <span>1 Hộp</span>
+                                <span>100.000₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="3" data-price="270000">
+                                <span>3 Hộp (Giảm 10%)</span>
+                                <span>270.000₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="6" data-price="480000">
+                                <span>6 Hộp (Giảm 20%)</span>
+                                <span>480.000₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="12" data-price="840000">
+                                <span>12 Hộp (Giảm 30%)</span>
+                                <span>840.000₫</span>
+                            </div>
+                        </div>
+
+                        <div class="box-price" id="basic-combo-price">100.000₫</div>
+                        <button class="cta-button" onclick="addSelectedComboToCart(this)">Thêm vào giỏ</button>
+                    </div>
+                </div>
+
+                <!-- Combo Hộp Cao Cấp -->
+                <div class="mystery-box combo-box">
+                    <img src="https://i.imgur.com/5jsR9jU.jpeg" alt="Combo Hộp Cao Cấp" class="box-image">
+                    <div class="box-content">
+                        <h2 class="box-title">Combo Hộp Cao Cấp</h2>
+                        <p class="box-description">
+                            Tiết kiệm chi phí khi mua số lượng lớn hộp cao cấp. Chọn số lượng mong muốn:
+                        </p>
+
+                        <div class="combo-options" data-product-type="Hộp Cao Cấp" data-base-price="200000">
+                            <div class="combo-option selected" data-quantity="1" data-price="200000">
+                                <span>1 Hộp</span>
+                                <span>200.000₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="3" data-price="540000">
+                                <span>3 Hộp (Giảm 10%)</span>
+                                <span>540.000₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="6" data-price="960000">
+                                <span>6 Hộp (Giảm 20%)</span>
+                                <span>960.000₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="12" data-price="1680000">
+                                <span>12 Hộp (Giảm 30%)</span>
+                                <span>1.680.000₫</span>
+                            </div>
+                        </div>
+
+                        <div class="box-price" id="premium-combo-price">200.000₫</div>
+                        <button class="cta-button" onclick="addSelectedComboToCart(this)">Thêm vào giỏ</button>
+                    </div>
+                </div>
+
+                <!-- Combo Hộp VIP -->
+                <div class="mystery-box combo-box">
+                    <img src="https://i.imgur.com/BOiKqaq.jpeg" alt="Combo Hộp VIP" class="box-image">
+                    <div class="box-content">
+                        <h2 class="box-title">Combo Hộp VIP</h2>
+                         <p class="box-description">
+                             Tiết kiệm chi phí khi mua số lượng lớn hộp VIP. Chọn số lượng mong muốn:
+                         </p>
+
+                        <div class="combo-options" data-product-type="Hộp VIP" data-base-price="300000">
+                           <div class="combo-option selected" data-quantity="1" data-price="300000">
+                                <span>1 Hộp</span>
+                                <span>300.000₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="3" data-price="810000">
+                                <span>3 Hộp (Giảm 10%)</span>
+                                <span>810.000₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="6" data-price="1440000">
+                                <span>6 Hộp (Giảm 20%)</span>
+                                <span>1.440.000₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="12" data-price="2520000">
+                                <span>12 Hộp (Giảm 30%)</span>
+                                <span>2.520.000₫</span>
+                            </div>
+                        </div>
+
+                        <div class="box-price" id="vip-combo-price">300.000₫</div>
+                        <button class="cta-button" onclick="addSelectedComboToCart(this)">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div id="info-section" style="display: none;">
+             <div class="header">
+                <h1>Thông Tin Sản Phẩm</h1>
+                <p>Chi tiết về các món đồ có thể có trong hộp bí ẩn</p>
+            </div>
+
+            <div class="info-content">
+                 <div class="info-grid">
+                    <!-- Hộp Cơ Bản Info -->
+                    <div class="info-item">
+                        <h3>Hộp Cơ Bản</h3>
+                        <div class="info-details">
+                             <div class="info-text">
+                                 <p><strong>Giá:</strong> 100.000₫</p>
+                                 <p><strong>Các vật phẩm có thể xuất hiện:</strong></p>
+                                 <ul>
+                                     <li>Tranh Đông Hồ thu nhỏ</li>
+                                     <li>Bộ thẻ bài về di tích lịch sử</li>
+                                     <li>Sổ tay văn hóa Việt</li>
+                                     <li>Móc khóa hình di tích</li>
+                                     <li>Hộp trà truyền thống nhỏ</li>
+                                     <li>Nón lá mini trang trí</li>
+                                     <li>Bộ bưu ảnh danh lam thắng cảnh</li>
+                                 </ul>
+                             </div>
+                             <div class="info-visuals">
+                                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/%C4%90%C3%A1m_c%C6%B0%E1%BB%9Bi_chu%E1%BB%99t.JPG/300px-%C4%90%C3%A1m_c%C6%B0%E1%BB%9Bi_chu%E1%BB%99t.JPG" alt="Tranh Đông Hồ Minh Họa" class="info-illustration">
+                                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=Hop Co Ban (100k VND)%0A- Tranh Dong Ho mini%0A- The bai di tich%0A- So tay van hoa%0A- Moc khoa%0A- Tra truyen thong%0A- Non la mini" class="qr-code" alt="QR Hộp Cơ Bản">
+                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Hộp Cao Cấp Info -->
+                     <div class="info-item">
+                         <h3>Hộp Cao Cấp</h3>
+                         <div class="info-details">
+                              <div class="info-text">
+                                  <p><strong>Giá:</strong> 200.000₫</p>
+                                  <p><strong>Các vật phẩm có thể xuất hiện:</strong></p>
+                                  <ul>
+                                      <li>Tượng nhỏ di tích (gốm/đồng)</li>
+                                      <li>Sách ảnh di sản Việt Nam</li>
+                                      <li>Trà sen Hồ Tây cao cấp</li>
+                                      <li>Bộ đồ chơi dân gian (ô ăn quan, tò he...)</li>
+                                      <li>Bản đồ du lịch/di tích</li>
+                                      <li>Khăn rằn Nam Bộ</li>
+                                      <li>Phiếu trải nghiệm văn hóa (tùy chọn)</li>
+                                  </ul>
+                              </div>
+                              <div class="info-visuals">
+                                   <img src="https://vba.com.vn/Pic/images/image-20230825155558-1.jpeg" alt="Trà sen Hồ Tây Minh Họa" class="info-illustration">
+                                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=Hop Cao Cap (200k VND)%0A- Tuong di tich%0A- Sach anh di san%0A- Tra sen Ho Tay%0A- Do choi dan gian%0A- Ban do%0A- Khan ran" class="qr-code" alt="QR Hộp Cao Cấp">
+                              </div>
+                         </div>
+                     </div>
+
+                    <!-- Hộp VIP Info -->
+                     <div class="info-item">
+                         <h3>Hộp VIP</h3>
+                         <div class="info-details">
+                              <div class="info-text">
+                                  <p><strong>Giá:</strong> 300.000₫</p>
+                                  <p><strong>Các vật phẩm có thể xuất hiện:</strong></p>
+                                  <ul>
+                                      <li>Tranh sơn mài mini / Lụa tơ tằm nhỏ</li>
+                                      <li>Bộ ấm chén Bát Tràng (2 chén)</li>
+                                      <li>Trà cổ thụ Tây Bắc / Trà Oolong cao cấp</li>
+                                      <li>Mô hình di tích 3D bằng gỗ</li>
+                                      <li>Bộ sưu tập tiền xưa / tem cổ</li>
+                                      <li>Vật phẩm thủ công mỹ nghệ độc đáo</li>
+                                      <li>Sách chuyên khảo về văn hóa</li>
+                                  </ul>
+                              </div>
+                              <div class="info-visuals">
+                                  <img src="https://product.hstatic.net/200000761325/product/en-men-hoa-bien-mat-ong-dang-qua-hong-day-du-phu-kien-1_07032022092909_da4c538785f94671ad9cb0b64d1aa6ea_large.jpg" alt="Bộ ấm chén Bát Tràng Minh Họa" class="info-illustration">
+                                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=Hop VIP (300k VND)%0A- Tranh son mai / Lua%0A- Am chen Bat Trang%0A- Tra co thu / Oolong%0A- Mo hinh 3D%0A- Tien / tem co" class="qr-code" alt="QR Hộp VIP">
+                              </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeAllModals()"></div>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <h2><i class="fas fa-shopping-cart"></i> Giỏ Hàng Của Bạn</h2>
+        <div class="modal-content">
+            <div class="cart-items-container" id="cartItemsContainer">
+                <p id="cart-empty-msg">Giỏ hàng của bạn đang trống.</p>
+                <!-- Cart items will be loaded here -->
+            </div>
+            <div class="cart-total" id="cartTotal">
+                Tổng cộng: 0₫
+            </div>
+            <!-- Added Checkout Button -->
+            <button id="checkout-button" class="submit-btn" style="margin-top: 20px; display: none;" onclick="proceedToCheckout()">Tiến hành thanh toán</button>
+            <button class="close-btn" onclick="hideCart()">Tiếp tục mua sắm</button>
+        </div>
+    </div>
+
+    <!-- Form đặt hàng -->
+    <div class="modal" id="orderForm">
+        <h2>Thông Tin Đặt Hàng</h2>
+         <!-- Added Order Summary -->
+         <p style="text-align: center; margin-bottom: 15px; font-size: 1.1em;">Tổng thanh toán: <strong id="orderSummaryAmount" style="color: #d32f2f;">0₫</strong> (<span id="orderSummaryCount">0</span> sản phẩm)</p>
+        <form id="orderFormData" onsubmit="submitOrder(event)">
+            <!-- Added Hidden Input for Total Price -->
+            <input type="hidden" id="orderTotalPrice">
+
+            <div class="form-group">
+                <label for="fullName">Họ và tên <span style="color: red;">*</span></label>
+                <input type="text" id="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Số điện thoại <span style="color: red;">*</span></label>
+                <input type="tel" id="phone" required pattern="[0-9]{10,11}" title="Số điện thoại gồm 10-11 chữ số">
+            </div>
+
+            <div class="form-group">
+                <label for="address">Địa chỉ nhận hàng <span style="color: red;">*</span></label>
+                <input type="text" id="address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email (Để nhận xác nhận)</label>
+                <input type="email" id="email">
+            </div>
+
+            <div class="payment-methods">
+                <h3>Phương thức thanh toán <span style="color: red;">*</span></h3>
+                <div class="payment-method">
+                    <input type="radio" id="momo" name="payment" value="momo" checked onchange="togglePaymentQR()">
+                    <label for="momo">Ví điện tử MoMo</label>
+                </div>
+                <div class="payment-method">
+                    <input type="radio" id="vnpay" name="payment" value="vnpay" onchange="togglePaymentQR()">
+                    <label for="vnpay">VNPAY QR</label>
+                </div>
+                <div class="payment-method">
+                    <input type="radio" id="cod" name="payment" value="cod" onchange="togglePaymentQR()">
+                    <label for="cod">Thanh toán khi nhận hàng (COD)</label>
+                </div>
+            </div>
+
+             <!-- Updated Payment QR Sections -->
+            <div class="payment-qr" id="momoQr">
+                 <p>Quét mã MoMo để thanh toán <strong class="payment-amount"></strong></p>
+                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Placeholder" alt="MoMo QR"> <!-- Placeholder SRC -->
+                 <p>Hoặc chuyển khoản đến SĐT: <strong style="color:#d32f2f">0961234567</strong><br>
+                 Nội dung: <span class="payment-order-code">[Mã đơn hàng]</span> Họ tên</p>
+             </div>
+
+             <div class="payment-qr" id="vnpayQr">
+                  <p>Quét mã VNPAY để thanh toán <strong class="payment-amount"></strong></p>
+                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Placeholder" alt="VNPAY QR"> <!-- Placeholder SRC -->
+                  <p>Hỗ trợ thanh toán qua ứng dụng ngân hàng / ví điện tử.<br>
+                  Nội dung: <span class="payment-order-code">[Mã đơn hàng]</span> SĐT</p>
+              </div>
+
+            <button type="submit" class="submit-btn">Xác nhận đặt hàng</button>
+            <button type="button" class="close-btn" onclick="hideOrderForm()">Hủy bỏ</button>
+        </form>
+    </div>
+
+    <!-- Thank You Modal -->
+    <div class="modal" id="thankYouModal" style="display: none;">
+        <div class="thank-you">
+            <h2>Đặt hàng thành công!</h2>
+            <p><strong>7 Nàng Bạch Tuyết Và 1 Chú Lùn</strong> xin chân thành cảm ơn bạn đã ủng hộ sản phẩm!</p>
+            <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Check Mark" style="max-width: 80px;">
+            <p>Mã đơn hàng của bạn là: <strong id="orderNumber" style="color: #d32f2f; font-size: 1.2em;"></strong></p>
+            <p style="margin-top:10px;">Chúng tôi sẽ liên hệ xác nhận và giao hàng trong thời gian sớm nhất.</p>
+            <button class="submit-btn" onclick="closeAllModals()">Đóng</button>
+        </div>
+    </div>
+
+
+    <script>
+        let cart = []; // Initialize cart array
+
+        // ---- Navigation ----
+        function showSection(sectionId) {
+            ['home-section', 'products-section', 'info-section'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+
+            const targetSection = document.getElementById(sectionId + '-section');
+            if (targetSection) targetSection.style.display = 'block';
+
+            document.querySelectorAll('.sidebar-menu a').forEach(link => {
+                link.classList.remove('active');
+                const linkTarget = link.getAttribute('onclick');
+                if(linkTarget && linkTarget.includes(`showSection('${sectionId}')`)){
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // ---- Cart Management ----
+        function loadCart() {
+            const storedCart = localStorage.getItem('mysteryBoxCart');
+            if (storedCart) {
+                cart = JSON.parse(storedCart);
+            }
+            updateCartDisplay();
+        }
+
+        function saveCart() {
+            localStorage.setItem('mysteryBoxCart', JSON.stringify(cart));
+        }
+
+         function addToCart(id, name, price, quantity = 1, showMessage = true) {
+            // Correct calculation for price per single item when adding combos
+            let pricePerSingleItem = quantity > 0 ? price / quantity : price;
+            if (id.endsWith('-1')) { // It's a single box, price is already per item
+                pricePerSingleItem = price;
+            }
+
+
+            const existingItemIndex = cart.findIndex(item => item.id === id);
+
+             if (existingItemIndex > -1) {
+                 // Item exists, increment its quantity
+                 cart[existingItemIndex].quantity += quantity;
+             } else {
+                 // Add new item with correct price per item and initial quantity
+                 cart.push({ id, name, price: pricePerSingleItem, quantity });
+             }
+
+             if (showMessage) {
+                 showFeedback(`Đã thêm: ${name} (x${quantity})`);
+             }
+             updateCartDisplay();
+             saveCart();
+         }
+
+        // // Optional: If needed later for direct quantity update in cart
+        // function updateCartQuantity(id, newQuantity) { ... }
+
+        function removeFromCart(id) {
+            const itemIndex = cart.findIndex(item => item.id === id);
+             if(itemIndex > -1){
+                 showFeedback(`Đã xóa: ${cart[itemIndex].name}`); // Show feedback before removing
+                 cart.splice(itemIndex, 1);
+                 updateCartDisplay();
+                 saveCart();
+             }
+        }
+
+        function calculateCartTotal() {
+            return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        }
+
+        function calculateTotalQuantity() {
+             return cart.reduce((count, item) => count + item.quantity, 0);
+        }
+
+
+        function updateCartDisplay() {
+            const cartContainer = document.getElementById('cartItemsContainer');
+            const cartTotalEl = document.getElementById('cartTotal');
+            const cartCountEl = document.getElementById('cart-count');
+            const emptyMsg = document.getElementById('cart-empty-msg');
+            const checkoutBtn = document.getElementById('checkout-button');
+
+            cartContainer.innerHTML = ''; // Clear current display
+
+             const totalQuantity = calculateTotalQuantity(); // Get total quantity
+
+             if (cart.length === 0) {
+                 emptyMsg.style.display = 'block';
+                 checkoutBtn.style.display = 'none';
+                 cartContainer.appendChild(emptyMsg); // Add empty message
+            } else {
+                emptyMsg.style.display = 'none';
+                 checkoutBtn.style.display = 'block'; // Show checkout button
+
+                cart.forEach(item => {
+                    const itemEl = document.createElement('div');
+                    itemEl.classList.add('cart-item');
+                     // Display total price for the line item
+                    const lineItemTotal = item.price * item.quantity;
+                    itemEl.innerHTML = `
+                        <div class="cart-item-details">
+                            <span class="cart-item-name">${item.name}</span><br>
+                            <span class="cart-item-price">(${item.quantity} x ${item.price.toLocaleString('vi-VN')}₫) = ${lineItemTotal.toLocaleString('vi-VN')}₫</span>
+                        </div>
+                        <button class="cart-remove-btn" onclick="removeFromCart('${item.id}')" title="Xóa khỏi giỏ"><i class="fas fa-times-circle"></i></button> <!-- Changed Icon -->
+                    `;
+                    // Prepend new items to the top for better visibility
+                    cartContainer.insertBefore(itemEl, cartContainer.firstChild);
+                 });
+             }
+
+             const total = calculateCartTotal();
+             cartTotalEl.textContent = `Tổng cộng: ${total.toLocaleString('vi-VN')}₫`;
+             cartCountEl.textContent = totalQuantity; // Use total quantity for badge
+        }
+
+
+        function showFeedback(message) {
+            const feedbackEl = document.createElement('div');
+            feedbackEl.textContent = message;
+            feedbackEl.style.position = 'fixed';
+            feedbackEl.style.bottom = '20px';
+            feedbackEl.style.left = '50%';
+            feedbackEl.style.transform = 'translateX(-50%)';
+            feedbackEl.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            feedbackEl.style.color = 'white';
+            feedbackEl.style.padding = '12px 25px';
+            feedbackEl.style.borderRadius = '30px'; /* Pill shape */
+            feedbackEl.style.zIndex = '2000';
+            feedbackEl.style.opacity = '1';
+            feedbackEl.style.transition = 'opacity 0.5s ease-out, bottom 0.5s ease-out';
+            feedbackEl.style.fontSize = '0.95em';
+            feedbackEl.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
+
+            document.body.appendChild(feedbackEl);
+
+            // Animate in slightly
+             setTimeout(() => {
+                 feedbackEl.style.bottom = '30px';
+             }, 10);
+
+
+            setTimeout(() => {
+                 feedbackEl.style.opacity = '0';
+                 feedbackEl.style.bottom = '10px'; // Animate out downwards
+                 setTimeout(() => {
+                    if (feedbackEl.parentNode) { // Check if still exists before removing
+                         document.body.removeChild(feedbackEl);
+                     }
+                 }, 500);
+             }, 2500); // Show for 2.5 seconds
+        }
+
+        // ---- Combo Selection ----
+         function selectComboOption(element) {
+             const parent = element.closest('.combo-options');
+             parent.querySelectorAll('.combo-option').forEach(opt => opt.classList.remove('selected'));
+             element.classList.add('selected');
+
+             const price = element.dataset.price;
+             const priceDisplay = parent.closest('.combo-box').querySelector('.box-price');
+             priceDisplay.textContent = parseInt(price).toLocaleString('vi-VN') + '₫';
+         }
+
+        document.querySelectorAll('.combo-option').forEach(option => {
+            option.addEventListener('click', () => selectComboOption(option));
+        });
+
+         function addSelectedComboToCart(button) {
+             const boxContent = button.closest('.box-content');
+             const comboOptionsContainer = boxContent.querySelector('.combo-options');
+             const selectedOption = comboOptionsContainer.querySelector('.combo-option.selected');
+
+             if (!selectedOption) {
+                 alert("Vui lòng chọn một gói combo!");
+                 return;
+             }
+
+             const productType = comboOptionsContainer.dataset.productType;
+             const quantity = parseInt(selectedOption.dataset.quantity);
+             const price = parseInt(selectedOption.dataset.price); // This is the TOTAL price for the combo
+             const comboId = `${productType.toLowerCase().replace(/\s+/g, '-')}-${quantity}`; // Unique ID like 'hop-co-ban-3'
+             const comboName = `${productType} (Combo ${quantity} Hộp)`;
+
+             // Add to cart - passing the total combo price and the quantity IN the combo
+             addToCart(comboId, comboName, price, quantity);
+         }
+
+        // ---- Modal Controls ----
+        function showOverlay() {
+             document.getElementById('overlay').style.display = 'block';
+        }
+        function hideOverlay() {
+             // Only hide overlay if no other modals are visible
+            const cartVisible = document.getElementById('cartModal').style.display === 'block';
+            const orderVisible = document.getElementById('orderForm').style.display === 'block';
+            const thanksVisible = document.getElementById('thankYouModal').style.display === 'block';
+            if (!cartVisible && !orderVisible && !thanksVisible) {
+                document.getElementById('overlay').style.display = 'none';
+            }
+        }
+        function closeAllModals() {
+            hideCart();
+            hideOrderForm();
+            hideThankYou();
+            hideOverlay();
+        }
+
+        function showCart() {
+            updateCartDisplay();
+             document.getElementById('cartModal').style.display = 'block';
+             showOverlay();
+        }
+        function hideCart() {
+             document.getElementById('cartModal').style.display = 'none';
+             hideOverlay(); // Attempt to hide overlay after closing
+        }
+
+        // Modified showOrderForm to accept calculated values
+        function showOrderForm(itemCount, totalPrice) {
+             // Update the order form summary section
+             document.getElementById('orderSummaryCount').textContent = itemCount;
+             document.getElementById('orderSummaryAmount').textContent = totalPrice.toLocaleString('vi-VN') + '₫';
+            document.getElementById('orderTotalPrice').value = totalPrice;
+
+            // Generate dynamic temporary order code suggestion for payment content
+             const tempOrderCode = 'DH' + Math.floor(Math.random() * 100000);
+             document.querySelectorAll('.payment-order-code').forEach(el => el.textContent = tempOrderCode);
+
+            updatePaymentQRCodes(totalPrice, tempOrderCode);
+            togglePaymentQR();
+
+            document.getElementById('orderForm').style.display = 'block';
+            showOverlay();
+        }
+         function hideOrderForm() {
+             document.getElementById('orderForm').style.display = 'none';
+             hideOverlay(); // Attempt to hide overlay after closing
+         }
+
+        function showThankYou(orderNumber) {
+            document.getElementById('orderNumber').textContent = orderNumber;
+            document.getElementById('thankYouModal').style.display = 'block';
+            showOverlay();
+        }
+         function hideThankYou() {
+            document.getElementById('thankYouModal').style.display = 'none';
+            hideOverlay(); // Attempt to hide overlay after closing
+         }
+
+        // ---- Checkout Process ----
+        // Added function to handle checkout from cart
+        function proceedToCheckout() {
+            const total = calculateCartTotal();
+            const quantity = calculateTotalQuantity();
+
+            if (total <= 0 || quantity <= 0) {
+                alert("Giỏ hàng trống, vui lòng thêm sản phẩm để thanh toán!");
+                return;
+            }
+            hideCart(); // Hide cart before showing order form
+            // Pass item count and total price to the order form function
+            showOrderForm(quantity, total);
+        }
+
+
+         function updatePaymentQRCodes(totalPrice, orderCode) {
+             const momoQrImg = document.getElementById('momoQr').querySelector('img');
+             const vnpayQrImg = document.getElementById('vnpayQr').querySelector('img');
+             const amountDisplay = document.querySelectorAll('.payment-amount');
+             const orderCodeDisplay = document.querySelectorAll('.payment-order-code'); // Select code elements
+
+             // Basic MoMo QR String (Replace 096... with your actual MoMo phone, Shop Name)
+              // Note: amount must be integer, billId (orderCode) is good practice
+              // Example format for app-to-app payment QR:
+              // 2|99|RECEIVER_PHONE|MERCHANT_NAME|STORE_CODE|AMOUNT|BILL_ID|MESSAGE
+              const momoData = `2|99|0961234567|7 Nan Bach Tuyet Store|HD${orderCode}|${totalPrice}|${orderCode}|TT ${orderCode}`;
+              momoQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=B51F1E&bgcolor=ffffff&data=${encodeURIComponent(momoData)}`;
+
+              // Basic VietQR/VNPAY String (Highly simplified - real implementation uses specific standards)
+              // For VietQR standard (transfer), format is more complex. For VNPAY payment QR, it uses their specific generation method.
+              // This is a basic text encoding only.
+              // Use VNPAY documentation for actual QR format: https://sandbox.vnpayment.vn/apis/docs/huong-dan-tich-hop/
+             const vnpayData = `Pay via VNPAY\nOrder: ${orderCode}\nAmount: ${totalPrice.toLocaleString('vi-VN')} VND`; // Placeholder
+             vnpayQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=005AAA&bgcolor=ffffff&data=${encodeURIComponent(vnpayData)}`;
+
+
+             // Update display texts
+             amountDisplay.forEach(el => el.textContent = `(${totalPrice.toLocaleString('vi-VN')}₫)`);
+              orderCodeDisplay.forEach(el => el.textContent = orderCode); // Update order code display
+
+         }
+
+         function togglePaymentQR() {
+             const selectedPayment = document.querySelector('input[name="payment"]:checked').value;
+             document.getElementById('momoQr').style.display = selectedPayment === 'momo' ? 'block' : 'none';
+             document.getElementById('vnpayQr').style.display = selectedPayment === 'vnpay' ? 'block' : 'none';
+         }
+
+        // Submit Order - Modified to clear cart
+        function submitOrder(event) {
+            event.preventDefault();
+
+            // Retrieve total price stored in the hidden input
+            const totalPrice = parseFloat(document.getElementById('orderTotalPrice').value) || 0;
+            const fullName = document.getElementById('fullName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+
+            if (!fullName || !phone || !address) {
+                alert('Vui lòng điền đầy đủ thông tin bắt buộc (*)!');
+                return;
+            }
+             if (totalPrice <= 0 || cart.length === 0) { // Extra check
+                alert('Đã có lỗi xảy ra hoặc giỏ hàng trống.');
+                 closeAllModals();
+                 return;
+             }
+
+
+             const orderNumber = 'HD' + Math.floor(100000 + Math.random() * 900000); // More Order-like
+
+
+             const orderData = {
+                 orderNumber,
+                 totalPrice: totalPrice,
+                 items: JSON.parse(JSON.stringify(cart)), // Store a copy of the cart items at time of order
+                 itemCount: calculateTotalQuantity(),
+                 customerInfo: { fullName, phone, address, email },
+                 paymentMethod,
+                 orderDate: new Date().toISOString()
+             };
+
+            console.log('ĐƠN HÀNG ĐÃ ĐẶT:', JSON.stringify(orderData, null, 2));
+             alert(`(Simulation)\nĐơn hàng ${orderNumber} đã được tạo.\nTổng tiền: ${totalPrice.toLocaleString('vi-VN')}₫\nPhương thức TT: ${paymentMethod.toUpperCase()}\n\nKiểm tra Console (F12) để xem chi tiết đơn hàng.`);
+
+            // --- Clear Cart and Update UI ---
+            cart = [];          // Empty the live cart array
+            saveCart();       // Persist the empty cart to localStorage
+            updateCartDisplay(); // Update the cart modal display (shows empty) and badge count
+
+            hideOrderForm();    // Close the order form
+            showThankYou(orderNumber); // Show confirmation
+
+            document.getElementById('orderFormData').reset(); // Reset form fields
+         }
+
+        // ---- Initialization ----
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCart();
+            showSection('home');
+            document.querySelectorAll('.combo-options').forEach(container => {
+                const firstOption = container.querySelector('.combo-option');
+                if (firstOption) selectComboOption(firstOption);
+             });
+            togglePaymentQR(); // Initialize correct QR visibility
+         });
+
+        document.getElementById('overlay').addEventListener('click', closeAllModals);
+
+    </script>
+
+</body>
+</html>
